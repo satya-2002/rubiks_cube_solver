@@ -56,4 +56,22 @@ public:
         }
     }
 
+    COLOR getColor(FACE face, unsigned row, unsigned col) const override {
+        char color = cube[int(face)][row][col];
+        switch (color) {
+            case 'B':
+                return COLOR::BLUE;
+            case 'R':
+                return COLOR::RED;
+            case 'G':
+                return COLOR::GREEN;
+            case 'O':
+                return COLOR::ORANGE;
+            case 'Y':
+                return COLOR::YELLOW;
+            default:
+                return COLOR::WHITE;
+        }
+    }
+
 };
