@@ -16,6 +16,15 @@ using namespace std;
  * We'll benchmark all models and observe which one is better for performance.
  */
 
+/* NOTE: Centre Cube are always stationary
+ * 0 UP (WHITE)
+ * 1 LEFT (GREEN)
+ * 2 FRONT (RED)
+ * 3 RIGHT (BLUE)
+ * 4 BACK (ORANGE)
+ * 5 DOWN (YELLOW)
+ */
+
 class RubiksCube {
 public:
     enum class FACE {
@@ -158,13 +167,13 @@ public:
 
     virtual RubiksCube &l2() = 0;
 
-    virtual RubiksCube &r() = 0;
-
     virtual RubiksCube &d() = 0;
 
     virtual RubiksCube &dPrime() = 0;
 
     virtual RubiksCube &d2() = 0;
+
+    virtual RubiksCube &r() = 0;
 
     virtual RubiksCube &rPrime() = 0;
 
@@ -177,6 +186,37 @@ public:
     virtual RubiksCube &b2() = 0;
 
     string getCornerColorString(uint8_t ind) const;
+
+    /* Implementation idea of getCornerIndex
+     *
+     * Y: YELLOW (DOWN) {Like of Z-axis}
+     * O: ORANGE (BACK) {Like of Y-axis}
+     * G: GREEN  (LEFT) {Like of X-axis}
+     *
+     * face        : D B L
+     * centre color: Y O G
+     * bit position: 2 1 0
+     * pos value   : 4 2 1
+     *
+     * How to represent corner?
+     * Answer: Use FACE
+     *
+     * How to evaluate binary representation of any corner?
+     * Answer: If ith position matches with ith corresponding FACE, then set the ith bit
+     * Eg: If corner is UBL, 0th bit matches with L, hence set 0th bit.
+     * * * Similarly, 1st bit matches with B, hence set 1st bit.
+     * * * so, now binary representation will be 011 and corresponding decimal value will be 3.
+     *
+     * Corner Binary_Representation Corresponding_Decimal_Value
+     * UFR 000 0
+     * UFL 001 1
+     * UBL 011 3
+     * UBR 010 2
+     * DFR 100 4
+     * DRL 101 5
+     * DBR 110 6
+     * DBL 111 7
+     */
 
     uint8_t getCornerIndex(uint8_t ind) const;
 
