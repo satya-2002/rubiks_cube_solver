@@ -20,4 +20,6 @@ add_executable(rubiks_cube_solver main.cpp
         PatternDatabases/math.cpp
         PatternDatabases/math.h
         PatternDatabases/PermutationIndexer.h
+        PatternDatabases/CornerPatternDatabase.cpp
+        PatternDatabases/CornerPatternDatabase.h
 )
