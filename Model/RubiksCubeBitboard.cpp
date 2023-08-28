@@ -399,5 +399,4 @@ struct HashBitboard {
         for (int i = 1; i < 6; i++) final_hash ^= r1.bitboard[i];
         return (size_t) final_hash;
     }
-
 };
